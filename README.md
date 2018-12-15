@@ -1,5 +1,3 @@
-**"f_down"** 
-is a newborn downloader. Please cheer☆ Please share whith your friend about this app.
 # How to use
 This enables you to download picture and log data of [futabachannel](https://www.2chan.net/) via [tsumanne.net](tsumanne.net).
 This work on your terminal.
