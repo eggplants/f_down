@@ -1,7 +1,8 @@
 **"tsumanne_down"** 
-is a newborn one. Please cheer☆ Please share whith your friend about this app.
-# tsumanne_down is...
+is a newborn downloader. Please cheer☆ Please share whith your friend about this app.
+# How to use
 This enables you to download picture and log data from [tsumanne.net](tsumanne.net).
+This work on your terminal.
 # TODO
 - Download by...
   - some indexes
