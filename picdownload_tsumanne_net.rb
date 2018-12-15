@@ -8,6 +8,3 @@ while (app = gets.chomp.to_i) !~ /\d{1}/
     retrieve_url
   end
 end
-rescue Interrupt
-  puts "\nthis prog was interrupted!"
-end
