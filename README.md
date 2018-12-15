@@ -9,9 +9,10 @@ This work on your terminal.
   - file size
   - post date
   - and more...
-- Download from 
-- create mht files with retrieved datas from futaba directly.
+- Download from futaba directly
+- create mht files with retrieved datas
 - GUI
+- Auto crawl new threads from my favorite indexes
 ###### Motive
 ["tsumanne.net"](tsumanne.net) is a site which is always logging a part of "[futabachannel](https://www.2chan.net/)" threads to create thread logs and retrieve pictures. (Other log sites aren't logging full-sized pictures.)
 But, unfortunately, some logs are removed automatically because of unpopularity. So, before removed, I wanna download these ones.
