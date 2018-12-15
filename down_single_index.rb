@@ -79,3 +79,6 @@ def retrieve_url(index)
     }
   end
 end
+rescue Interrupt
+  puts "\nthis prog was interrupted!"
+end
