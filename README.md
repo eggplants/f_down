@@ -1,7 +1,7 @@
-**"tsumanne_down"** 
+**"f_down"** 
 is a newborn downloader. Please cheer☆ Please share whith your friend about this app.
 # How to use
-This enables you to download picture and log data from [tsumanne.net](tsumanne.net).
+This enables you to download picture and log data of [futabachannel](https://www.2chan.net/) via [tsumanne.net](tsumanne.net).
 This work on your terminal.
 # TODO
 - Download by...
@@ -11,7 +11,8 @@ This work on your terminal.
   - file size
   - post date
   - and more...
-- create mht files with retrieved datas
+- Download from 
+- create mht files with retrieved datas from futaba directly.
 - GUI
 ###### Motive
 ["tsumanne.net"](tsumanne.net) is a site which is always logging a part of "[futabachannel](https://www.2chan.net/)" threads to create thread logs and retrieve pictures. (Other log sites aren't logging full-sized pictures.)
