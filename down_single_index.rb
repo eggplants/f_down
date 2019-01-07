@@ -1,15 +1,13 @@
+def retrieve_url(board,index)
 begin
-require 'open-uri'
-require 'fileutils'
-require 'csv'
-def retrieve_url(index)
-  puts '*plz input index you wanna download*'
-  index = gets.chomp.to_s
+  require 'open-uri'
+  require 'fileutils'
+  require 'csv'
   for j in 0..300
-    aaa = "https://tsumanne.net/si/" + index + "/" + j.to_s
+    aaa = "https://tsumanne.net/#{board}/" + index + "/" + j.to_s
     aaan = URI.encode(aaa)
     io_1 = OpenURI.open_uri(aaan)
-    print('Now analysing:', j+1, " page...")
+    puts("Now analysing:#{j+1} page...")
     io_1source = io_1.read
     thread_url = io_1source
     .scan(/[a-z]{2}.{1}[a-z]{4}.{1}[0-9]{4}.{1}[0-9]{2}.{1}[0-9]{2}.{1}[0-9]{7}/).uniq
@@ -19,19 +17,16 @@ def retrieve_url(index)
       exit!
     end
     thread_url.each {|koshiro|
-      print("Now analysing:", j + 1, " page...\n")
       anan = "https://tsumanne.net/" + koshiro
-      begin
-        io_2 = OpenURI.open_uri(anan)
-      rescue => e
-        puts $!
-        break
-      end
+      io_2 = OpenURI.open_uri(anan)
       io_2source = io_2.read
       htmName = io_2source.scan(/[0-9]{9}.htm/)
       htmName.each {|htm|
         print('Now analysing:',htm, " page...\n")
-        dirName = "/home/eggplant/Downloads/futaba_log/" + index + "/"
+        dirName = ""
+        File.open('save_dir.txt') do |file|
+        dirName = "#{file.read.chomp}" + index + "/"
+      end
         fileDir = dirName + htm + ';' + index
         unless FileTest.exist?(fileDir)
             FileUtils.mkdir_p(fileDir)
@@ -40,6 +35,8 @@ def retrieve_url(index)
         htm_src = 'https://tsumanne.net/' + koshiro + "/" + htm
         print("Now saving:", htm, "...")
         # write htm data
+
+
         open(htmPath, 'wb') {|output|
         begin
           output.write(io_2source.gsub(/shift-JIS/, "UTF-8"))
