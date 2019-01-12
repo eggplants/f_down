@@ -9,7 +9,7 @@ def anlyse_index(board_id)
       begin
         uri = "http://tsumanne.net/#{board_id}/cid.php?" + inc.to_s
         a = open(uri).read.scan(/<h2>(.*) .*<\/h2>/)
-        cath << [inc,a[0]] if a.size != 0
+        cath << [inc,a[0].gsub(/(\[|\]|")/,"").] if a.size != 0
       rescue OpenURI::HTTPError => ex
         puts "Handle missing video here"
       rescue Interrupt
