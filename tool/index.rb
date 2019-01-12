@@ -67,6 +67,8 @@ loop do
 end
 #end
 puts "E&E!!"
+3.times{print(".");sleep(1)}
+puts
 rescue Interrupt
   puts "\nthis prog was interrupted!"
 end
