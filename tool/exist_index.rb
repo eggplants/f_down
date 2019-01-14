@@ -2,7 +2,7 @@ def retrieve_htm_n(index)
   require "csv"
   for id in ["si","my","tj","sa"]
     data = Hash.new{|h,k| h[k]=[]}
-    CSV.foreach("../csv/category_#{id}.csv", headers: true) do |row|
+    CSV.foreach(File.join(__dir__, "../csv/category_#{id}.csv"), headers: true) do |row|
       data[row["index"]] << row
     end
     ind_id = data[index].to_s.scan(/\d+/)
