@@ -12,11 +12,11 @@ def retrieve_url(board,index)
     .scan(/[a-z]{2}.{1}[a-z]{4}.{1}[0-9]{4}.{1}[0-9]{2}.{1}[0-9]{2}.{1}[0-9]{7}/).uniq
     aaannn = thread_url.size
     if aaannn == 0
-      puts 'download finished!', 'E&E!'
+      puts %q(download finished! E&E!)
       exit!
     end
     thread_url.each {|koshiro|
-      anan = "https://tsumanne.net/" + koshiro
+      anan = "https://tsumanne.net/#{koshiro}"
       io_2 = OpenURI.open_uri(anan)
       io_2source = io_2.read
       titlen = io_2source.scan(/e>(.* )-/).flatten
@@ -28,14 +28,15 @@ def retrieve_url(board,index)
         File.open('save_dir.txt') do |file|
           dirName = "#{file.read.chomp}#{board}/#{index}/"
         end
-        fileDir = "#{dirName}#{htm};#{index};#{titlen}" if titlen != []
-        fileDir = "#{dirName}#{htm};#{index}" if titlen == []
+        fileDir = titlen != [] ? "#{dirName}#{htm};#{index};#{titlen}"
+         : "#{dirName}#{htm};#{index}"
         unless FileTest.exist?(fileDir)
             FileUtils.mkdir_p(fileDir)
-            FileUtils.cp(["../style/th.css", "../style/th.js"], fileDir)
+            FileUtils.cp([File.join(__dir__, "../style/th.css"), File
+            .join(__dir__, "../style/th.js")], fileDir)
         end
-        htmPath = fileDir + "/" + htm
-        htm_src = 'https://tsumanne.net/' + koshiro + "/" + htm
+        htmPath = "#{fileDir}/#{htm}"
+        htm_src = "https://tsumanne.net/#{koshiro}/#{htm}"
         print("Now saving:", htm, "...")
         # write htm data
         open(htmPath, 'wb') {|output|
@@ -51,10 +52,10 @@ def retrieve_url(board,index)
         thread_data_1 = io_2source.scan(/[a-z]{2}[0-9]+\.[a-z]{3,4}/).push(thread_data_0).flatten
         thread_data_2 = io_2source.scan(/[0-9]+s\.\w{3,4}/).push(thread_data_1).flatten.uniq
         thread_data_2.each {|odaie|
-          img_src = 'https://tsumanne.net/' + koshiro + "/" + odaie
+          img_src = "https://tsumanne.net/#{koshiro}/#{odaie}"
           print('Now saving:', odaie, '...')
           fileName = File.basename(img_src)
-          filePath = fileDir + "/" + fileName
+          filePath = "#{fileDir}/#{fileName}"
           unless FileTest.exist?(filePath)
           # write image adata
           open(filePath, 'wb') {|output|
