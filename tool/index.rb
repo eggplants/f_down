@@ -65,7 +65,6 @@ loop do
     break
   end
 end
-#end
 puts "E&E!!"
 3.times{print(".");sleep(1)}
 puts
