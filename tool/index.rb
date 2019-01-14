@@ -14,7 +14,7 @@ loop do
   puts "4, look up existense of index"
   app = gets.chomp.to_s
   if app == "1"
-    boards = {:img => "si", :may => "my", :test_jun => "tj", :dat => "sa"}
+    boards = {:img => "si", :may => "my", :test_jun => "tj", :dat => "sa", :special => "sp"}
     puts "*plz select board*"
     puts '(Now u can choose: img, may, test-jun, dat)'
     board_id = gets.chomp.to_s
@@ -28,9 +28,9 @@ loop do
 
 
   elsif app == "2"
-    boards = {:img => "si", :may => "my", :test_jun => "tj", :dat => "sa"}
+    boards = {:img => "si", :may => "my", :test_jun => "tj", :dat => "sa", :special => "sp" }
     puts "*plz select board*"
-    puts '(Now u can choose: img, may, test_jun, dat)'
+    puts "(Now u can choose: img, may, test_jun, dat)"
     board_id = gets.chomp.to_s
     if boards.has_key?(board_id.to_sym)
       urls,indexes = [],[]
@@ -52,13 +52,13 @@ loop do
   elsif app == "3"
     boards = {:img => "si", :may => "my", :test_jun => "tj", :dat => "sa"}
     puts "*plz select board*"
-    puts '(Now u can choose: img, may, test_jun, dat)'
+    puts "(Now u can choose: img, may, test_jun, dat)"
     board_id = gets.chomp.to_s
     anlyse_index(boards[board_id.to_sym]) if boards.has_key?(board_id.to_sym)
 
 
   elsif app == "4"
-    puts '*plz input index you wanna view*'
+    puts "*plz input index you wanna view*"
     index = gets.chomp.to_s
     retrieve_htm_n(index)
   elsif app == "exit"
