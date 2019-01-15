@@ -25,7 +25,7 @@ def retrieve_url(board,index)
       htmName.each {|htm|
         print('Now analysing:',htm, " page...\n")
         dirName = ""
-        File.open('save_dir.txt') do |file|
+        File.open(File.join(__dir__, 'save_dir.txt')) do |file|
           dirName = "#{file.read.chomp}#{board}/#{index}/"
         end
         fileDir = titlen != [] ? "#{dirName}#{htm};#{index};#{titlen}"
