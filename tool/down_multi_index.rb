@@ -22,7 +22,7 @@ def down_thread(board,index,thread_url)
       (htmName = source.scan(/[0-9]{9}.htm/)).each do |htm|
         print('Now analysing:',htm, " page...\n")
         dirName = ""
-        File.open('save_dir.txt') do |file|#load directory where save files
+        File.open(File.join(__dir__, 'save_dir.txt')) do |file|#load directory where save files
           dirName = "#{file.read}#{board}/#{index.join("/")}/"
         end
         fileDir = "#{dirName}#{htm};#{index.join("_")}"
