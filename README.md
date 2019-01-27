@@ -4,13 +4,17 @@ This enables you to thread data (consist of html+pics) of [futabachannel](https:
 - You can choose directory where save the files. Please change "/tool/save_dir.txt".
 # functions
 1,download by single-index  
-- select a single index in tsumanne, the threads data have this one try to bulk download.
+- select a single index in tsumanne, the threads data have this one try to bulk download.  
+
 2,download by multi-index  
-- select some indexes, threads data have this ones try to bulk download.
+- select some indexes, threads data have this ones try to bulk download.  
+
 3,analyse existing index  
-- update index data (accumulated on csv) with new data
+- update index data (accumulated on csv) with new data  
+
 4,look up existense of index  
-- search on which board the index is registered,with csv data of index
+- search on which board the index is registered,with csv data of index  
+
 5,search threads by index  
 - select some indexes, threads data have this ones try to search.
 # Contains
