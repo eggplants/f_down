@@ -29,12 +29,17 @@ def down_thread(board,index,thread_url)
         end
         fileDir = titlen != [] ? "#{dirName}#{htm};#{index};#{titlen}"
          : "#{dirName}#{htm};#{index}"
+        begin
         unless FileTest.exist?(fileDir)
           FileUtils.mkdir_p(fileDir)
           FileUtils.cp([File.join(__dir__, "../style/th.css"),
           File.join(__dir__, "../style/th.js")], fileDir)
         else
           puts "exist!"
+        end
+        rescue Errno::EACCES
+          puts 'please check setting "save_dir.txt"!'
+          exit
         end
         htmPath = "#{fileDir}/#{htm}"
         print !titlen.empty? ? "Now saving:#{htm}-[#{titlen}]..."
