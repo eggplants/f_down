@@ -1,7 +1,8 @@
 def anlyse_index(board_id)
   require "open-uri"
   require "csv"
-  cc = 1000
+  cc = 1000#value of depth of searching
+  i = 0
   puts "now analysing #{cc.to_s} indexes..."
   data = CSV.read(File.join(__dir__, "../csv/category_#{board_id}.csv"))
   CSV.open(File.join(__dir__, "../csv/category_#{board_id}.csv"),'a') do |cath|
@@ -16,9 +17,11 @@ def anlyse_index(board_id)
         puts "\nthis prog was interrupted! (in:#{inc})"
         exit
       end
+      i += 1 if a.size != 0
       puts a.size != 0 ? "#{inc} #{a[0][0]}\r" : "#{inc} nope\r"
       printf "\e[1A"
     end
     puts "search finished!\nplz check csv file(category_#{board_id}.csv) out!"
+    puts "new added index(es): #{i}"
   end
 end

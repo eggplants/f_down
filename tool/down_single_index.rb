@@ -9,11 +9,10 @@ def retrieve_url(board,index)
     puts("Now analysing:#{j+1} page...")
     io_1source = io_1.read
     thread_url = io_1source
-    .scan(/[a-z]{2}.{1}[a-z]{4}.{1}[0-9]{4}.{1}[0-9]{2}.{1}[0-9]{2}.{1}[0-9]{7}/).uniq
+    .scan(/[a-z]{2}.{1}[a-z]{4}.{1}[0-9]{4}.{1}[0-9]{2}.{1}[0-9]{2}.{1}[0-9]{1,7}/).uniq
     aaannn = thread_url.size
     if aaannn == 0
       puts %q(download finished! E&E!)
-      exit!
     end
     thread_url.each {|koshiro|
       anan = "https://tsumanne.net/#{koshiro}"
@@ -25,7 +24,7 @@ def retrieve_url(board,index)
       htmName.each {|htm|
         print('Now analysing:',htm, " page...\n")
         dirName = ""
-        File.open(File.join(__dir__, 'save_dir.txt')) do |file|
+        File.open(File.join(__dir__, "save_dir.txt")) do |file|
           dirName = "#{file.read.chomp}#{board}/#{index}/"
         end
         fileDir = titlen != [] ? "#{dirName}#{htm};#{index};#{titlen}"
@@ -36,8 +35,8 @@ def retrieve_url(board,index)
             .join(__dir__, "../style/th.js")], fileDir)
         end
         htmPath = "#{fileDir}/#{htm}"
-        htm_src = "https://tsumanne.net/#{koshiro}/#{htm}"
-        print("Now saving:", htm, "...")
+        print !titlen.empty? ? "Now saving:#{htm}-[#{titlen}]..."
+         : "Now saving:#{htm}-[ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!]..."
         # write htm data
         open(htmPath, 'wb') {|output|
         begin
@@ -68,14 +67,10 @@ def retrieve_url(board,index)
             puts $!
             CSV.open("../csv/not_found.csv",'a') do |log|
               log << [htm,odaie,index]
-            end
-          end
+          end;end
           }
         else
           puts "exist!"
         end
-        }
-      }
-    }
-  end
-end
+      }}}
+end;end
