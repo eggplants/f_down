@@ -2,6 +2,17 @@
 This enables you to download picture and .html data of [futabachannel](https://www.2chan.net/) via [tsumanne.net](https://tsumanne.net/).　　
 - This work on terminal. Execute "index.rb" at first.　　
 - You can choose directory where save the files. Please change "/tool/save_dir.txt".
+# functions
+1,download by single-index
+- select a single index in tsumanne, the threads data have this one try to bulk download.
+2,download by multi-index
+- select some indexes, threads data have this ones try to bulk download.
+3,analyse existing index
+- update index data (accumulated on csv) with new data
+4,look up existense of index
+- search on which board the index is registered,with csv data of index
+5,search threads by index
+- select some indexes, threads data have this ones try to search.
 # Contains
 .
 ├── csv  
