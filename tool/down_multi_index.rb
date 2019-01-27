@@ -2,30 +2,33 @@
 require 'open-uri'
 require 'fileutils'
 require 'csv'
-def index_htms(board,index)
-  thread_url = []
+def index_htms(board,index,thread_url)
+  thread_url=[]
   for j in 0..300
     source = OpenURI.open_uri(URI
       .encode("https://tsumanne.net/#{board}/#{index}/#{j.to_s}")).read
     puts("Now analysing:#{j+1} page...")
-    an = source.scan(/[a-z]{2}.{1}[a-z]{4}.{1}[0-9]{4}.{1}[0-9]{2}.{1}[0-9]{2}.{1}[0-9]{7}/)
+    an = source.scan(/[a-z]{2}.{1}[a-z]{4}.{1}[0-9]{4}.{1}[0-9]{2}.{1}[0-9]{2}.{1}[0-9]{1,7}/)
     .uniq.flatten
     an.size != 0 ? thread_url.push(an) : break
   end
-  puts "#{thread_url.size} thread(s) found!"
+  puts "#{thread_url.flatten.size} thread(s) found!"
   return thread_url
 end
 
 def down_thread(board,index,thread_url)
     thread_url.each do |koshiro|#thread urls
       source = OpenURI.open_uri("https://tsumanne.net/#{koshiro}").read
+      titlen = source.scan(/e>(.* )-/).flatten
+      titlen = titlen[0].encode("UTF-8", "Shift_JIS") if titlen != []
       (htmName = source.scan(/[0-9]{9}.htm/)).each do |htm|
         print('Now analysing:',htm, " page...\n")
         dirName = ""
-        File.open(File.join(__dir__, 'save_dir.txt')) do |file|#load directory where save files
-          dirName = "#{file.read}#{board}/#{index.join("/")}/"
+        File.open(File.join(__dir__, "save_dir.txt")) do |file|#load directory where save files
+          dirName = "#{file.read.chomp}#{board}/#{index.join("/")}/"
         end
-        fileDir = "#{dirName}#{htm};#{index.join("_")}"
+        fileDir = titlen != [] ? "#{dirName}#{htm};#{index};#{titlen}"
+         : "#{dirName}#{htm};#{index}"
         unless FileTest.exist?(fileDir)
           FileUtils.mkdir_p(fileDir)
           FileUtils.cp([File.join(__dir__, "../style/th.css"),
@@ -34,13 +37,13 @@ def down_thread(board,index,thread_url)
           puts "exist!"
         end
         htmPath = "#{fileDir}/#{htm}"
-        htm_src = "https://tsumanne.net/#{koshiro}/#{htm}"
-        print("Now saving:", htm, "...")
+        print !titlen.empty? ? "Now saving:#{htm}-[#{titlen}]..."
+         : "Now saving:#{htm}-[ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!]..."
         open(htmPath, 'wb') do |output|#save thread htm file
           begin
             output.write(source.sub(/src.*js"/, 'src="./th.js"'))
             output.write(source.gsub(/shift-JIS/, "UTF-8"))
-            puts("successful!\n")
+            puts "successful!\n"
           rescue => er
             puts $!
           end
