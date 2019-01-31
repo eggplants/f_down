@@ -56,6 +56,7 @@ loop do
               source = open("https://tsumanne.net/#{url}").read
               if (titlen = source.scan(/e>(.* )-/).flatten)!=nil
                 titlen = titlen[0].encode("UTF-8", "Shift_JIS") if titlen != []
+                titlen = "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!" if titlen == []
                 puts("#{urls.index(url)+1}:#{titlen}","url==(https://tsumanne.net/#{url})")
               end
             end
