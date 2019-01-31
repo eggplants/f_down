@@ -27,7 +27,7 @@ def down_thread(board,index,thread_url)
         File.open(File.join(__dir__, "save_dir.txt")) do |file|#load directory where save files
           dirName = "#{file.read.chomp}#{board}/#{index.join("/")}/"
         end
-        fileDir = titlen != [] ? "#{dirName}#{htm};#{index};#{titlen}"
+        fileDir = titlen != [] ? "#{dirName}#{htm};#{index.join(",")};#{titlen}"
          : "#{dirName}#{htm};#{index}"
         begin
         unless FileTest.exist?(fileDir)
@@ -46,8 +46,7 @@ def down_thread(board,index,thread_url)
          : "Now saving:#{htm}-[ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!]..."
         open(htmPath, 'wb') do |output|#save thread htm file
           begin
-            output.write(source.sub(/src.*js"/, 'src="./th.js"'))
-            output.write(source.gsub(/shift-JIS/, "UTF-8"))
+            output.write(source.sub(/src.*js"/, 'src="./th.js"').gsub(/shift-JIS/, "UTF-8"))
             puts "successful!\n"
           rescue => er
             puts $!
