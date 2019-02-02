@@ -35,9 +35,9 @@ loop do
     puts "*plz select board*"
     puts "(Now u can choose: img, may, test_jun, dat)"
     board_id = gets.chomp.to_s
-    if boards.has_key?(board_id.to_sym)
+    if boards.has_key?(board_id.chomp.to_sym)
       urls,indexes,thread_url,f = [],[],[],0
-      File.open('save_dir.txt') do |file|
+      File.open(File.join(__dir__, "save_dir.txt")) do |file|
         puts '*plz input indexs you wanna download(To exit, type ".")*'
         while (index = gets.chomp.to_s) != "."
           indexes.push(index)
