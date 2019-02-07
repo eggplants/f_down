@@ -1,3 +1,7 @@
+/*
+this script code is cited and edited
+original source: https://tsumanne.net/sa/src/b.0225.css
+*/
 #hdp
 {
 	text-align: center;
@@ -58,7 +62,7 @@ iframe
 #amazon .search
 {
 	text-align:center;
-}	
+}
 #amazon .search label
 {
 	display:block;
@@ -131,7 +135,7 @@ iframe
 		width:100%;
 		overflow:hidden;
 	}
-	
+
 	#amazon li
 	{
 		zoom:0.5;
