@@ -13,13 +13,15 @@ def retrieve_url(board,index)
     aaannn = thread_url.size
     if aaannn == 0
       puts %q(download finished! E&E!)
+      break
     end
     thread_url.each {|koshiro|
       anan = "https://tsumanne.net/#{koshiro}"
       io_2 = OpenURI.open_uri(anan)
       io_2source = io_2.read
       titlen = io_2source.scan(/e>(.* )-/).flatten
-      titlen = titlen[0].encode("UTF-8", "Shift_JIS") if titlen != []
+      titlen = titlen == [] ? "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!"
+       : titlen[0].encode("UTF-8", "Shift_JIS")
       htmName = io_2source.scan(/[0-9]{9}.htm/)
       htmName.each {|htm|
         print('Now analysing:',htm, " page...\n")
