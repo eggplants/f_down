@@ -16,9 +16,12 @@ This enables you to thread data (consist of html+pics) of [futabachannel](https:
 - search on which board the index is registered,with csv data of index  
 
 5,search threads by index  
-- select some indexes, threads data have this ones try to search.
+- select some indexes, threads data have this ones try to search.  
+
+6,confirm save path (save_dir.txt)
+- confirm save path
 # Contains
-.
+.  
 ├── csv  
 │├── category_my.csv  
 │├── category_sa.csv  
@@ -26,6 +29,7 @@ This enables you to thread data (consist of html+pics) of [futabachannel](https:
 │├── category_sp.csv  
 │├── category_tj.csv  
 │└── not_found.csv  
+├── README.md  
 ├── style  
 │├── th.css  
 │└── th.js  
@@ -38,4 +42,4 @@ This enables you to thread data (consist of html+pics) of [futabachannel](https:
  ├── search_cath.rb  
  └── search_thread_by_index.rb  
   
-3 directories, 15 files  
+3 directories, 16 files
