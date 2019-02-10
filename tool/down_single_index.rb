@@ -26,14 +26,14 @@ def retrieve_url(board,index)
       htmName.each {|htm|
         print('Now analysing:',htm, " page...\n")
         dirName = ""
-        File.open(File.join(__dir__, "save_dir.txt")) do |file|
+        File.open(File.join(__dir__, "save_dir.txt"),"r") do |file|
           dirName = "#{file.read.chomp}#{board}/#{index}/"
         end
         fileDir = titlen != [] ? "#{dirName}#{htm};#{index};#{titlen}"
          : "#{dirName}#{htm};#{index}"
         begin
         unless FileTest.exist?(fileDir)
-            FileUtils.mkdir_p(fileDir)
+            FileUtils.mkdir_p(fileDir.gsub(/\n/,""))
             FileUtils.cp([File.join(__dir__, "../style/th.css"), File
             .join(__dir__, "../style/th.js")], fileDir)
         end
@@ -47,8 +47,7 @@ def retrieve_url(board,index)
         # write htm data
         open(htmPath, 'wb') {|output|
         begin
-          output.write(io_2source.sub(/src.*js"/, 'src="./th.js"'))
-          output.write(io_2source.gsub(/shift-JIS/, "UTF-8"))
+          output.write(io_2source.sub(/src.*js"/, 'src="./th.js"').gsub(/shift-JIS/, "UTF-8"))
           puts "successful!\n"
          rescue => er
           puts $!
@@ -72,7 +71,7 @@ def retrieve_url(board,index)
             }
           rescue => er
             puts $!
-            CSV.open(File.join(__dir__, "../csv/not_found.csv",'a')) do |log|
+            CSV.open(File.join(__dir__, "../csv/not_found.csv"),'a') do |log|
               log << [htm,odaie,index]
           end;end
           }

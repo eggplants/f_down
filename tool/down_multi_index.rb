@@ -69,7 +69,7 @@ def down_thread(board,index,thread_url)
                 }
               rescue => er
                 puts $!
-                CSV.open(File.join(__dir__, "../csv/not_found.csv",'a')) do |log|
+                CSV.open(File.join(__dir__, "../csv/not_found.csv"),'a') do |log|
                   log << [htm,odaie,index]
             end;end;end
           else
