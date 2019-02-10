@@ -72,7 +72,7 @@ def retrieve_url(board,index)
             }
           rescue => er
             puts $!
-            CSV.open("../csv/not_found.csv",'a') do |log|
+            CSV.open(File.join(__dir__, "../csv/not_found.csv",'a')) do |log|
               log << [htm,odaie,index]
           end;end
           }
