@@ -20,7 +20,7 @@ def down_thread(board,index,thread_url)
     thread_url.each do |koshiro|#thread urls
       source = OpenURI.open_uri("https://tsumanne.net/#{koshiro}").read
       titlen = source.scan(/e>(.* )-/).flatten
-      titlen = titlen == [] ? "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!" : titlen[0].encode("UTF-8", "Shift_JIS")
+      titlen = titlen == [] ? "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━" : titlen[0].encode("UTF-8", "Shift_JIS")
       (htmName = source.scan(/[0-9]{9}.htm/)).each do |htm|
         print('Now analysing:',htm, " page...\n")
         dirName = ""

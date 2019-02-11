@@ -1,7 +1,9 @@
 def anlyse_index(board_id)
   require "open-uri"
   require "csv"
-  cc = 1000#value of depth of searching
+  puts "plz imput value of depth of searching (recommend: 100)"
+  cc = gets.to_i#value of depth of searching
+  cc = 100 if cc==0
   i = 0
   puts "now analysing #{cc.to_s} indexes..."
   data = CSV.read(File.join(__dir__, "../csv/category_#{board_id}.csv"))
@@ -15,13 +17,12 @@ def anlyse_index(board_id)
         puts "Handle missing video here"
       rescue Interrupt
         puts "\nthis prog was interrupted! (in:#{inc})"
-        exit
       end
       i += 1 if a.size != 0
-      puts a.size != 0 ? "#{inc} #{a[0][0]}\r" : "#{inc} nope\r"
-      printf "\e[1A"
+      print a.size != 0 ? "#{inc} #{a[0]}\r"
+       : "#{inc} nope\r"
     end
-    puts "search finished!\nplz check csv file(category_#{board_id}.csv) out!"
+    puts "\nsearch finished!\nplz check csv file(category_#{board_id}.csv) out!"
     puts "new added index(es): #{i}"
   end
 end

@@ -68,7 +68,7 @@ loop do
               source = open("https://tsumanne.net/#{url}").read
               if (titlen = source.scan(/e>(.* )-/).flatten)!=nil
                 titlen = titlen[0].encode("UTF-8", "Shift_JIS") if titlen != []
-                titlen = "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!" if titlen == []
+                titlen = "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━" if titlen == []
                 puts "#{urls.index(url)+1}:#{titlen}","url==(https://tsumanne.net/#{url})"
               end
             end
@@ -142,7 +142,9 @@ loop do
 
 rescue Interrupt
   puts "\nexit?(y/n)"
-  exit! if /y/ =~ gets.to_s
+  break if /y/ =~ gets.to_s
+rescue SocketError
+  puts "network is unavailable!:plz check your network."
 end
 
 end#loop-end
