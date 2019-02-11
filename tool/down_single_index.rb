@@ -20,8 +20,8 @@ def retrieve_url(board,index)
       io_2 = OpenURI.open_uri(anan)
       io_2source = io_2.read
       titlen = io_2source.scan(/e>(.* )-/).flatten
-      titlen = titlen == [] ? "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!"
-       : titlen[0].encode("UTF-8", "Shift_JIS")
+      titlen = titlen == [] ? "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━"
+       : titlen[0].encode("UTF-8", "Shift_JIS").chop.gsub(/( |　)/, "_")
       htmName = io_2source.scan(/[0-9]{9}.htm/)
       htmName.each {|htm|
         print('Now analysing:',htm, " page...\n")
