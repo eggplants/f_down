@@ -22,7 +22,7 @@ def retrieve_url(board,index)
       titlen = io_2source.scan(/e>(.* )-/).flatten
       titlen = titlen == [] ? "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━"
        : titlen[0].encode("UTF-8", "Shift_JIS").chop.gsub(/( |　)/, "_")
-      htmName = io_2source.scan(/[0-9]{9}.htm/)
+      htmName = io_2source.scan(/[0-9]{2,9}.htm/)
       htmName.each {|htm|
         print('Now analysing:',htm, " page...\n")
         dirName = ""
@@ -45,9 +45,9 @@ def retrieve_url(board,index)
         print !titlen.empty? ? "Now saving:#{htm}-[#{titlen}]..."
          : "Now saving:#{htm}-[ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!]..."
         # write htm data
-        open(htmPath, 'wb') {|output|
+        open(htmPath, 'wb'){|output|
         begin
-          output.write(io_2source.sub(/src.*js"/, 'src="./th.js"').gsub(/shift-JIS/, "UTF-8"))
+          output.write(io_2source.sub(/src.*js"/,'src="./th.js"').gsub(/shift-JIS/, "UTF-8"))
           puts "successful!\n"
          rescue => er
           puts $!
@@ -63,7 +63,7 @@ def retrieve_url(board,index)
           filePath = "#{fileDir}/#{fileName}"
           unless FileTest.exist?(filePath)
           # write image adata
-          open(filePath, 'wb') {|output|
+          open(filePath, 'wb'){|output|
           begin
             open(img_src) {|data|
             output.write(data.read)

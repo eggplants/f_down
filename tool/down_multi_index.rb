@@ -22,7 +22,7 @@ def down_thread(board,index,thread_url)
       titlen = source.scan(/e>(.* )-/).flatten
       titlen = titlen == [] ? "ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━"
        : titlen[0].encode("UTF-8", "Shift_JIS").chop!.gsub(/( |　)/, "_")
-      (htmName = source.scan(/[0-9]{9}.htm/)).each do |htm|
+      (htmName = source.scan(/[0-9]{2,9}.htm/)).each do |htm|
         print('Now analysing:',htm, " page...\n")
         dirName = ""
         File.open(File.join(__dir__, "save_dir.txt")) do |file|#load directory where save files
