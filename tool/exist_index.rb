@@ -1,13 +1,16 @@
 def retrieve_htm_n(index)
-  require "csv"
+  require 'csv'
+
   for id in ["si","my","tj","sa","sp"]
     data = Hash.new{|h,k| h[k]=[]}
-    CSV.foreach(File.join(__dir__, "../csv/category_#{id}.csv"), headers: true) do |row|
+    csvpath=File.join(__dir__, "../csv/category_#{id}.csv")
+    CSV.foreach(csvpath, headers: true) do |row|
       data[row["index"]] << row
     end
     ind_id = data[index].to_s.scan(/\d+/)
-    print("this index page is http://tsumanne.net/",
-      id,"/cid.php?",ind_id[0],"\n") unless data[index].size == 0
-    puts "this index does not exist in category_#{id}.csv!" if data[index].size == 0
+    if data[index].size != 0
+      puts "this index page is http://tsumanne.net/#{id}/cid.php?#{ind_id[0]}"
+      puts "this index does not exist in category_#{id}.csv!"
+    end
   end
 end

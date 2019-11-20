@@ -4,7 +4,7 @@ def retrieve_url(board,index)
   require 'csv'
   for j in 0..300
     aaa = "https://tsumanne.net/#{board}/" + index + "/" + j.to_s
-    aaan = URI.encode(aaa)
+    aaan = URI.escape(aaa)
     io_1 = OpenURI.open_uri(aaan)
     puts("Now analysing:#{j+1} page...")
     io_1source = io_1.read
@@ -45,7 +45,7 @@ def retrieve_url(board,index)
         print !titlen.empty? ? "Now saving:#{htm}-[#{titlen}]..."
          : "Now saving:#{htm}-[ｷﾀ━━━━━━(ﾟ∀ﾟ)━━━━━━ !!!!!]..."
         # write htm data
-        open(htmPath, 'wb'){|output|
+        File.open(htmPath, 'wb'){|output|
         begin
           output.write(io_2source.sub(/src.*js"/,'src="./th.js"').gsub(/shift-JIS/, "UTF-8"))
           puts "successful!\n"
@@ -63,9 +63,9 @@ def retrieve_url(board,index)
           filePath = "#{fileDir}/#{fileName}"
           unless FileTest.exist?(filePath)
           # write image adata
-          open(filePath, 'wb'){|output|
+          File.open(filePath, 'wb'){|output|
           begin
-            open(img_src) {|data|
+            URI.open(img_src) {|data|
             output.write(data.read)
             puts "successful!\n"
             }
